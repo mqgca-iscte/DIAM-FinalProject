@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ICommon - HomePage</title>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
+{% load static %}
+<link rel="stylesheet" type="text/css"
+ href="{% static 'community/style.css' %}" />
+ <div class="banner">
+  <div class="navbar">
+      <ul>
+   <li><a href= "{% url 'community:registarnovo' %}"> Sign Up </a></li>
+   <li><a href= "{% url 'community:loginview' %}"> Login </a></li>
+   <li><a href= "{% url 'community:logoutt' %}"> Logout </a></li>
+          </ul>
+    </div>
+      <div class="content">
+     {% if request.user.is_authenticated %}
+        <h1> Welcome {{ request.user.username }} !</h1>
+    {% else %}
+        <h1>O utilizador não se encontra logado:(</h1>
+    {% endif %}
+          {% if error_message %}
+            <div class="error"><strong>{{ error_message }}</strong></div>
+{% endif %}
+ </div>
+ </div>
+</body>

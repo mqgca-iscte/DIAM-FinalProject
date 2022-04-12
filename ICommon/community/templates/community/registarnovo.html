@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registar user</title>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Cardo&display=swap" rel="stylesheet">
+{% load static %}
+<link rel="stylesheet" type="text/css"
+ href="{% static 'community/form.css' %}" />
+ <div class="container">
+        <div class="text">
+            <h1>Sign up</h1> </div>
+{% if error_message %}
+     <div class="error"> <p><strong>{{ error_message }}</strong></p> </div>
+{% endif %}
+{% load static %}
+<form action="{% url 'community:registarnovo' %}" method="POST" > {% csrf_token %}
+    <div class="data">
+    <label> Username :
+    <input required type="text" name="username"/>
+    </label><br/> </div>
+    <div class="data">
+    <label> Email :
+    <input required type="email" name="email"/>
+    </label><br/></div>
+    <div class="data">
+    <label> Password :
+    <input required type="password" name="password"/>
+    </label><br/></div>
+    <div class="btn">
+<input required type="submit" value="Registar" name="registaruser"/>
+    </div>
+     <div class="signup_link"> Already a member?
+     <a href= "{% url 'community:loginview' %}"> Login </a>
+        </div>
+</form>
+     </div>
+</body>
+</html>
