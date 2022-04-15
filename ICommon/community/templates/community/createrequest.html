@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create request</title>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Cardo&display=swap" rel="stylesheet">
+{% load static %}
+<link rel="stylesheet" type="text/css"
+ href="{% static 'community/forms.css' %}" />
+<div class="container">
+<div class="text"> <h1>New request</h1> </div>
+<form action="{% url 'community:createrequest' %}" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+ <div class="data">
+ <label> Name
+    <input type="text" name="name"/>
+</label><br/>
+ </div>
+    <div class="image">
+ <label> Image
+    <input required type="file" name="myfile" accept="image/*"/>
+</label><br/>
+ </div>
+    <div class="btn">
+<input type="submit" value="Save new request" name="saverequest"/>
+    </div>
+    {{ request.session.username }}
+</form>
+</div>
+</body>
+</html>

@@ -8,12 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
 {% load static %}
 <link rel="stylesheet" type="text/css"
- href="{% static 'community/style.css' %}" />
+ href="{% static 'community/styles.css' %}" />
  <div class="banner">
   <div class="navbar">
       <ul>
    <li><a href= "{% url 'community:registarnovo' %}"> Sign Up </a></li>
    <li><a href= "{% url 'community:loginview' %}"> Login </a></li>
+   <li><a href= "{% url 'community:createcommunities' %}"> Create community </a></li>
+   <li><a href= "{% url 'community:createrequest' %}"> Send request </a></li>
+   <li><a href= "{% url 'community:seerequest' %}"> Requests </a></li>
    <li><a href= "{% url 'community:logoutt' %}"> Logout </a></li>
           </ul>
     </div>
@@ -21,10 +24,25 @@
      {% if request.user.is_authenticated %}
         <h1> Welcome {{ request.user.username }} !</h1>
     {% else %}
-        <h1>O utilizador não se encontra logado:(</h1>
+        <h1>User is not logged:(</h1>
     {% endif %}
           {% if error_message %}
             <div class="error"><strong>{{ error_message }}</strong></div>
+{% endif %}
+          {% if communities_list %}
+    <h3> Community list </h3>
+        <div class="comunidades">
+        <ul>
+ {% for community in communities_list %}
+ <li>
+{{ community.name }}
+          <img src= {{ community.image }}>
+  {% endfor %}
+ </li>
+</ul>
+ </div>
+{% else %}
+<p>There are no communities available.</p>
 {% endif %}
  </div>
  </div>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Requests</title>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
+{% load static %}
+<link rel="stylesheet" type="text/css"
+ href="{% static 'community/styles.css' %}" />
+<div class="banner">
+     <div class="content">
+     {% if request_list %}
+    <h3> Requests list </h3>
+        <ul>
+ {% for request in request_list %}
+ <li>
+     <div>
+{{ request.name }}
+     <form action="{% url 'community:acceptrequest' request.id %}" style="display:inline-block;">
+         <div class="registeraccept"> <input type="submit" value="Accept" /> </div>
+     </form>
+     <form action="{% url 'community:denyrequest' request.id %}" style="display:inline-block;">
+         <div class="registerdeny">   <input type="submit" value="Deny" /> </div>
+     </form>
+     </div>
+  {% endfor %}
+ </li>
+</ul>
+ </div>
+{% else %}
+<p>There are no requests available.</p>
+{% endif %}
+     </div>
+</body>
+</html>

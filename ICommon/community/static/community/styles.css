@@ -21,6 +21,11 @@
     justify-content: space-between;
 }
 
+.content img{
+    max-width: 200px;
+    height: auto;
+}
+
 .logo {
     width: 150px;
     cursor: pointer;
@@ -62,8 +67,54 @@
     text-align: center;
     color: #fff;
 }
+.registeraccept input{
+    height: 30px;
+    width: 100px;
+    outline: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 2px solid #009c03;
+    background-color: transparent;
+    letter-spacing: 1px;
+    font-family: 'Cardo', serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.registeraccept input:hover{
+    background-color: #009c03;
+}
+
+.registerdeny input{
+    height: 30px;
+    width: 100px;
+    outline: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 2px solid darkred;
+    background-color: transparent;
+    letter-spacing: 1px;
+    font-family: 'Cardo', serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.registeraccept input:hover{
+    background-color: #009c03;
+}
+
+.registerdeny input:hover{
+    background-color: darkred;
+}
+
+
 
 .error{
     color: red;
 }
-

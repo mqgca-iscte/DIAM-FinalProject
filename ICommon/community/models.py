@@ -6,10 +6,7 @@ from django.contrib.auth.models import User
 
 class Utilizador(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    communities = models.ManyToManyField('Community', related_name='users')
-
-    def __str__(self):
-        return self.user
+    #communities = models.ManyToManyField('Community', related_name='users')
 
 
 class Community(models.Model):
@@ -19,6 +16,13 @@ class Community(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Request(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.TextField()
+    user = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
+    creation_data = models.DateTimeField('data de publicacao')
 
 
 class Post(models.Model):
