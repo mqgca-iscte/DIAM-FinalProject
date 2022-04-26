@@ -12,7 +12,9 @@ class Utilizador(models.Model):
 class Community(models.Model):
     name = models.CharField(max_length=100)
     image = models.TextField()
+    user = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
     creation_data = models.DateTimeField('data de publicacao')
+
 
     def __str__(self):
         return self.name

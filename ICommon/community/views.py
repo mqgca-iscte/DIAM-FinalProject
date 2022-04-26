@@ -78,7 +78,9 @@ def createcommunities(request):
                 fs = FileSystemStorage()
                 filename = fs.save(myfile.name, myfile)
                 uploaded_file_url = fs.url(filename)
-                c = Community.objects.create(name=name, image=uploaded_file_url, creation_data=creation_data)
+                user_id = request.session.get('user_id')
+                utilizador = get_object_or_404(Utilizador, user_id=user_id)
+                c = Community.objects.create(name=name, image=uploaded_file_url,user=utilizador, creation_data=creation_data)
                 c.save()
             return HttpResponseRedirect(reverse('community:index', args=""))
     else:
@@ -123,8 +125,11 @@ def acceptrequest(request, request_id):
     else:
         name = requestt.name
         image = requestt.image
+        user = requestt.user
+        #u = user.user.username
+        #request.session['nome'] = u
         creation_data = timezone.now()
-        c = Community.objects.create(name=name, image=image, creation_data=creation_data)
+        c = Community.objects.create(name=name, image=image, user=user, creation_data=creation_data)
         c.save()
         requestt.delete()
         return HttpResponseRedirect(reverse('community:index', args=""))
