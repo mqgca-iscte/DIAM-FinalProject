@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Requests</title>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
+{% load static %}
+<link rel="stylesheet" type="text/css"
+ href="{% static 'community/style.css' %}" />
+<div class="banner">
+     <div class="content">
+     {% if reports_list %}
+    <h3> Reports list </h3>
+        <ul>
+ {% for reports in reports_list %}
+ <li>
+     <div>
+{{ reports.post.description }}
+     <form action="{% url 'community:ignorereport' reports.id %}" style="display:inline-block;">
+         <div class="registeraccept"> <input type="submit" value="Ignore" /> </div>
+     </form>
+     <form action="{% url 'community:deletereports' reports.id %}" style="display:inline-block;">
+         <div class="registerdeny">   <input type="submit" value="Delete" /> </div>
+     </form>
+     </div>
+  {% endfor %}
+ </li>
+</ul>
+ </div>
+{% else %}
+<p>There are no reports available.</p>
+{% endif %}
+     </div>
+</body>
+</html>
