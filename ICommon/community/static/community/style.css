@@ -1,0 +1,240 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.banner{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url('../community/images/poster.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.navbar{
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content img{
+    max-width: 200px;
+    height: auto;
+}
+
+.logo {
+    width: 150px;
+    cursor: pointer;
+}
+
+.navbar ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+
+.navbar ul li a{
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.navbar ul li::after{
+    content: '';
+    height:3px;
+    width: 0;
+    background: #00c217;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+
+.navbar ul li:hover::after{
+    width : 100%;
+}
+
+.content{
+    width : 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: #fff;
+}
+
+.registeraccept input{
+    height: 30px;
+    width: 100px;
+    outline: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 2px solid #009c03;
+    background-color:  #009c03;
+    letter-spacing: 1px;
+    font-family: 'Cardo', serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.registeraccept input:hover{
+    background-color: #027300;
+}
+
+.views input{
+    height: 30px;
+    width: 100px;
+    outline: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 2px solid blue;
+    background-color: transparent;
+    letter-spacing: 1px;
+    font-family: 'Cardo', serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.views input:hover{
+    background-color: blue;
+}
+
+
+.comunidades{
+    display: inline-block;
+    float: left;
+    position: center;
+}
+
+.comunidades li{
+    text-decoration: none;
+    list-style: none;
+}
+
+.comunidades1{
+    display: inline-block;
+    float: left;
+    position: center;
+    margin-left: 4%;
+}
+
+.comunidades1 li{
+    text-decoration: none;
+    list-style: none;
+}
+
+.registerdeny input{
+    height: 30px;
+    width: 100px;
+    outline: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 2px solid darkred;
+    background-color: darkred;
+    letter-spacing: 1px;
+    font-family: 'Cardo', serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.registerdeny input:hover{
+    background-color: #730000;
+}
+
+
+
+.error{
+    color: red;
+}
+
+a .button{
+    display: inline-block;
+    background-color: green;
+    border-radius: 50px;
+    width: 30px;
+    float:left;
+    margin-left: 42%;
+    overflow: hidden;
+    height: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+}
+
+ .button .icon{
+    display: inline-block;
+    float: left;
+    border-radius: 50px;
+    box-sizing: border-box;
+    margin-left: 3px;
+}
+
+ .button .icon img{
+     margin-top: 4px;
+ }
+
+ .button span{
+    color: black;
+}
+
+ .button:hover{
+    width: 120px;
+}
+
+.button1{
+    display: inline-block;
+    background-color: darkred;
+    border-radius: 50px;
+    width: 30px;
+    overflow: hidden;
+    float: left;
+    height: 30px;
+    margin-left: 56%;
+    margin-top: -2.20%;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+}
+
+.button1 .icon1{
+    display: inline-block;
+    float: left;
+    border-radius: 50px;
+    box-sizing: border-box;
+    margin-left: 3px;
+
+}
+
+.button1 span{
+    color: black;
+}
+
+.button1:hover{
+    width: 120px;
+}
+
+.icon1 img{
+    margin-top: 10%;
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    box-sizing: border-box;
+}
+
+.content a{
+    text-decoration: none;
+}
+
+

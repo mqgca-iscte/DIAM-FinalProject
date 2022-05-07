@@ -38,35 +38,28 @@
     position: relative;
 }
 
-.navbar ul li a{
-    text-decoration: none;
-    color: #fff;
+.navbar ul li h1{
+    color: white;
     text-transform: uppercase;
 }
 
-.navbar ul li::after{
-    content: '';
-    height:3px;
-    width: 0;
-    background: #00c217;
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    transition: 0.5s;
-}
-
-.navbar ul li:hover::after{
+.text{
     width : 100%;
-}
-
-.content{
-    width : 100%;
-    position: absolute;
     top: 50%;
     transform: translateY(-50%);
     text-align: center;
     color: #fff;
 }
+
+.text ul a{
+    color: white;
+    text-decoration: none;
+}
+
+.text ul a:hover{
+    color: #009c03;
+}
+
 .registeraccept input{
     height: 30px;
     width: 100px;
@@ -86,35 +79,4 @@
 
 .registeraccept input:hover{
     background-color: #009c03;
-}
-
-.registerdeny input{
-    height: 30px;
-    width: 100px;
-    outline: none;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 500;
-    border-radius: 25px;
-    border: 2px solid darkred;
-    background-color: transparent;
-    letter-spacing: 1px;
-    font-family: 'Cardo', serif;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: .5s;
-}
-
-.registeraccept input:hover{
-    background-color: #009c03;
-}
-
-.registerdeny input:hover{
-    background-color: darkred;
-}
-
-
-
-.error{
-    color: red;
 }

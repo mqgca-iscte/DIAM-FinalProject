@@ -8,16 +8,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
 {% load static %}
 <link rel="stylesheet" type="text/css"
- href="{% static 'community/styles.css' %}" />
+ href="{% static 'community/style.css' %}" />
  <div class="banner">
   <div class="navbar">
       <ul>
+   <li><a href= "{% url 'community:seereports' %}"> See reports </a></li>
+          {% if not user.is_authenticated %}
    <li><a href= "{% url 'community:registarnovo' %}"> Sign Up </a></li>
    <li><a href= "{% url 'community:loginview' %}"> Login </a></li>
-   <li><a href= "{% url 'community:createcommunities' %}"> Create community </a></li>
-   <li><a href= "{% url 'community:createrequest' %}"> Send request </a></li>
+          {% endif %}
+          {% if user.is_superuser %}
    <li><a href= "{% url 'community:seerequest' %}"> Requests </a></li>
+   <li><a href= "{% url 'community:createcommunities' %}"> Create community </a></li>
+          {% endif %}
+          {% if not user.is_superuser  %}
+          {% if user.is_authenticated %}
+   <li><a href= "{% url 'community:createrequest' %}"> Send request </a></li>
+   <li><a href= "{% url 'community:mycommunities' %}"> My Communities </a></li>
+          {% endif %}
+          {% endif %}
+          {% if user.is_authenticated %}
    <li><a href= "{% url 'community:logoutt' %}"> Logout </a></li>
+          {% endif %}
           </ul>
     </div>
       <div class="content">
@@ -31,16 +43,19 @@
 {% endif %}
           {% if communities_list %}
     <h3> Community list </h3>
-        <div class="comunidades">
-        <ul>
  {% for community in communities_list %}
- <li>
-{{ community.name }}
-          <img src= {{ community.image }}>
+            <div class="comunidades1">
+      <li><a href= "{% url 'community:viewpage' community.id %}"> <img src={{ community.image }}> </a> </li>
+         {% if request.user.is_authenticated %}
+      <form action="{% url 'community:joincommunity' community.id %}" style="display:inline-block;">
+         <div class="registeraccept"> <input type="submit" value="Join" /> </div>
+     </form>
+     {% endif %}
+      <form action="{% url 'community:loginview' %}" style="display:inline-block;">
+         <div class="registerdeny"> <input type="submit" value="View" /> </div>
+     </form>
+            </div>
   {% endfor %}
- </li>
-</ul>
- </div>
 {% else %}
 <p>There are no communities available.</p>
 {% endif %}

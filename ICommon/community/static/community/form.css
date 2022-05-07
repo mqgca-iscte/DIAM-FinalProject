@@ -105,6 +105,34 @@ form .btn input:hover{
     color: white;
 }
 
+form .btn1 {
+    margin: 30px 0;
+    height: 45px;
+    width: 100%;
+}
+
+form .btn1 input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 2px solid darkred;
+    background-color: transparent;
+    letter-spacing: 1px;
+    font-family: 'Cardo', serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .5s;
+}
+
+form .btn1 input:hover{
+    background-color: darkred;
+}
+
+
 .signup_link a{
     text-decoration: none;
     color: lightgreen;

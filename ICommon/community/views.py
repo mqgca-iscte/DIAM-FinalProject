@@ -14,13 +14,18 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.core.files.storage import FileSystemStorage
 
-from .models import Community, Post, Utilizador, Request
+from .models import Community, Post, Request, Utilizador, Reports, Comment, Likes
 
 
 def index(request):
     communities_list = Community.objects.order_by('-creation_data')[:5]
     context = {'communities_list': communities_list}
     return render(request, 'community/index.html', context)
+
+
+def viewpage(request, community_id):
+    community = get_object_or_404(Community, pk=community_id)
+    return render(request, 'community/viewpage.html', {'community': community})
 
 
 def registarnovo(request):
@@ -78,10 +83,17 @@ def createcommunities(request):
                 fs = FileSystemStorage()
                 filename = fs.save(myfile.name, myfile)
                 uploaded_file_url = fs.url(filename)
-                user_id = request.session.get('user_id')
-                utilizador = get_object_or_404(Utilizador, user_id=user_id)
-                c = Community.objects.create(name=name, image=uploaded_file_url,user=utilizador, creation_data=creation_data)
-                c.save()
+                if request.user.is_superuser:
+                    utilizador = request.user
+                    c = Community.objects.create(name=name, image=uploaded_file_url,
+                                                 user=utilizador, creation_data=creation_data)
+                    c.save()
+                else:
+                    user_id = request.session.get('user_id')
+                    utilizador = get_object_or_404(Utilizador, user_id=user_id)
+                    c = Community.objects.create(name=name, image=uploaded_file_url, user=utilizador,
+                                                 creation_data=creation_data)
+                    c.save()
             return HttpResponseRedirect(reverse('community:index', args=""))
     else:
         return render(request, 'community/createcommunities.html', {})
@@ -100,21 +112,127 @@ def createrequest(request):
                 fs = FileSystemStorage()
                 filename = fs.save(myfile.name, myfile)
                 image = fs.url(filename)
-                if request.session.get('user_id') is not None:
-                    user_id = request.session.get('user_id')
-                    utilizador = get_object_or_404(Utilizador, user_id=user_id)
-                    pedido = Request.objects.create(name=name, image=image, user=utilizador,
-                                                    creation_data=creation_data)
-                    pedido.save()
-                    return render(request, 'community/index.html', {})
+                user = request.user
+                r = Request.objects.create(name=filename, image=image,
+                                           user=user, creation_data=creation_data)
+                r.save()
+                return HttpResponseRedirect(reverse('community:index', args=""))
     else:
         return render(request, 'community/createrequest.html', {})
+
+
+def createpost(request, community_id):
+    community = get_object_or_404(Community, pk=community_id)
+    if request.method == 'POST':
+        post = request.POST['post']
+        username = request.user.username
+        if request.method == 'POST' and request.FILES['myfile']:
+            myfile = request.FILES['myfile']
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            image = fs.url(filename)
+            like = Likes.objects.create(user=None, likes=0)
+            p = Post.objects.create(username=username, image=image, description=post, likes=like, community=community)
+            p.save()
+            return render(request, 'community/viewpage.html', {'community': community})
+    else:
+        return render(request, 'community/createpost.html', {'community': community})
+
+
+def likes(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    likes_id = post.likes.id
+    filtering = Likes.objects.filter(pk=likes_id, user=request.user)
+    if not filtering:
+        post.likes.likes += 1
+        post.likes.user = request.user
+        post.likes.save()
+        post.save()
+        return HttpResponseRedirect(reverse('community:detailed', args=(post.id,)))
+    else:
+        return HttpResponseRedirect(reverse('community:index', args=""))
+
+
+def report(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    if request.method == 'POST':
+        reason = request.POST['reason']
+        request = Reports.objects.create(post=post, reason=reason)
+        request.save()
+        return HttpResponseRedirect(reverse('community:detailed', args=(post.id,)))
+    else:
+        return render(request, 'community/report.html', {'post': post})
+
+
+def seereports(request):
+    reports_list = Reports.objects.order_by('-id')[:5]
+    context = {'reports_list': reports_list}
+    return render(request, 'community/reports.html', context)
+
+
+def ignorereport(request, reports_id):
+    reports = get_object_or_404(Reports, pk=reports_id)
+    if not reports:
+        return render(request, 'community/reports.html',
+                      {'report': reports, 'error_message': "Não foi possivel ignorar"})
+    else:
+        reports.delete()
+        return HttpResponseRedirect(reverse('community:index', args=""))
+
+
+def deletereports(request, reports_id):
+    reports = get_object_or_404(Reports, pk=reports_id)
+    post_id = reports.post.id
+    post = get_object_or_404(Post, pk=post_id)
+    if not post:
+        return render(request, 'community/reports.html',
+                      {'report': reports, 'error_message': "Não foi possivel apagar o post"})
+    else:
+        reports.delete()
+        post.delete()
+        return HttpResponseRedirect(reverse('community:index', args=""))
+
+
+def detailed(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    comments_list = post.comments.all()
+    return render(request, 'community/detailed.html', {'post': post, 'comments_list': comments_list})
+
+
+def createcomment(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    if request.method == 'POST':
+        comment = request.POST['comment']
+        creation_data = timezone.now()
+        user = request.user
+        c = Comment.objects.create(user=user, comment=comment, creation_data=creation_data)
+        c.save()
+        post.comments.add(c)
+        return HttpResponseRedirect(reverse('community:detailed', args=(post.id,)))
+    else:
+        return render(request, 'community/detailed.html', {'post': post})
 
 
 def seerequest(request):
     request_list = Request.objects.order_by('-creation_data')[:5]
     context = {'request_list': request_list}
     return render(request, 'community/seerequest.html', context)
+
+
+def joincommunity(request, community_id):
+    community = get_object_or_404(Community, pk=community_id)
+    user_id = request.session.get('user_id')
+    utilizador = get_object_or_404(Utilizador, user_id=user_id)
+    utilizador.communities.add(community)
+    return HttpResponseRedirect(reverse('community:index', args=""))
+
+
+def mycommunities(request):
+    user_id = request.session.get('user_id')
+    utilizador = get_object_or_404(Utilizador, user_id=user_id)
+    communities_list = utilizador.communities.all()
+    context = {'communities_list': communities_list}
+    return render(request, 'community/mycommunity.html', context)
 
 
 def acceptrequest(request, request_id):
@@ -126,8 +244,6 @@ def acceptrequest(request, request_id):
         name = requestt.name
         image = requestt.image
         user = requestt.user
-        #u = user.user.username
-        #request.session['nome'] = u
         creation_data = timezone.now()
         c = Community.objects.create(name=name, image=image, user=user, creation_data=creation_data)
         c.save()

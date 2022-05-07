@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report post</title>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Cardo&display=swap" rel="stylesheet">
+{% load static %}
+<link rel="stylesheet" type="text/css"
+ href="{% static 'community/form.css' %}" />
+<div class="container">
+<div class="text"> <h1>New report</h1> </div>
+<form action="{% url 'community:report' post.id %}" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+ <div class="data">
+ <label> Reason
+    <input type="text" name="reason"/>
+</label><br/>
+ </div>
+    <div class="btn1">
+<input type="submit" value="Send Report" name="savepost"/>
+    </div>
+</form>
+</div>
+</body>
+</html>

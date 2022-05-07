@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
+{% load static %}
+<link rel="stylesheet" type="text/css"
+ href="{% static 'community/style2.css' %}" />
+<div class="banner">
+     <input type="checkbox" id="show">
+    <div class="popup">
+         <div class="closebutton">
+         <label for="show"> <img src='../../static/community/images/cancel.png' alt="submit"/> </label>
+    </div>
+        <div class="comments">
+        {% if comments_list %}
+    {% for comments in comments_list %}
+        <h4> {{ comments.user.username }} : {{ comments.comment }} </h4>
+        <h5> {{ comments.creation_data }}</h5>
+    {% endfor %}
+        {% else %}
+       <h4> No comments available. </h4>
+        {% endif %}
+            </div>
+        <div class="inputbutton">
+     <form action="{% url 'community:createcomment' post.id %}" method="POST">
+{% csrf_token %}
+ <div class="data">
+ <label>
+    <input type="text" name="comment"/>
+</label><br/>
+ </div>
+    <div class="btn">
+<input type="submit" value="Save new comment" name="savecomment"/>
+    </div>
+</form>
+            </div>
+    </div>
+<div class="content">
+    <p> Username : {{ post.username }} </p>
+      <img src= {{ post.image }} >
+    <p> Likes : {{ post.likes.likes }} </p>
+     <p> {{ post.description }} </p>
+    <a href= "{% url 'community:likes' post.id %}">
+    <div class="button">
+       <div class="icon">
+             <img src='../../static/community/images/heart1.png' alt="submit"/>
+           </div>
+        <span><strong>Like</strong></span>
+    </div>
+         </a>
+    <a href= "{% url 'community:report' post.id %}">
+    <div class="button1">
+    <div class="icon1">
+        <img src='../../static/community/images/warning-sign.png'>
+    </div>
+        <span><strong>Report</strong></span>
+        </div>
+    </a>
+      <label for="show" class="show-btn">
+    <div class="button2">
+    <div class="icon2">
+        <img src='../../static/community/images/chat.png'>
+    </div>
+        <span><strong> Comment</strong></span>
+        </div>
+        </label>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ICommon - HomePage</title>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
+{% load static %}
+<link rel="stylesheet" type="text/css"
+ href="{% static 'community/style.css' %}" />
+<div class="banner">
+<div class="content">
+    <h3> My communities </h3>
+{% for community in communities_list %}
+      <div class="comunidades">
+      <li> <a href=  "{% url 'community:viewpage' community.id %}">
+          <img src={{ community.image }}>
+      </a>
+          </li>
+          <form action="{% url 'community:loginview' %}" style="display:inline-block;">
+         <div class="views"> <input type="submit" value="View" /> </div>
+     </form>
+           </div>
+{% empty %}
+    <li>Sorry, no communities in this list.</li>
+{% endfor %}
+ </div>
+</div>
+</div>
+</body>
+</html>

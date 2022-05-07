@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View page</title>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
+{% load static %}
+<link rel="stylesheet" type="text/css"
+ href="{% static 'community/style1.css' %}" />
+<div class="banner">
+<div class="content">
+    <div class="navbar">
+    <ul>
+    <li>
+<h1>{{ community.name }}</h1>
+        </li>
+        </ul>
+        </div>
+     <div class="text">
+       <form action="{% url 'community:createpost' community.id %}" style="display:inline-block;">
+         <div class="registeraccept"> <input type="submit" value="Create post" /> </div>
+     </form>
+        </div>
+        {% for post in community.post_set.all %}
+        <p>
+            <div class="text">
+         <ul> <a href= "{% url 'community:detailed' post.id %}"> {{ post.description }} </a>
+         </ul>
+        </div>
+            </p>
+        {% endfor %}
+</div>
+</div>
+</body>
