@@ -8,12 +8,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
 {% load static %}
 <link rel="stylesheet" type="text/css"
- href="{% static 'community/style.css' %}" />
+ href="{% static 'community/styles.css' %}" />
 <div class="banner">
 <div class="content">
-    <h3> My communities </h3>
+    <div class="joined">
+    <h3> Communities joined </h3>
+        </div>
 {% for community in communities_list %}
-      <div class="comunidades">
+      <div class="communitiesJoined">
       <li> <a href=  "{% url 'community:viewpage' community.id %}">
           <img src={{ community.image }}>
       </a>
@@ -23,7 +25,22 @@
      </form>
            </div>
 {% empty %}
-    <li>Sorry, no communities in this list.</li>
+    <div class="nocommunities"> Sorry, you didn´t joined any communities.</div>
+{% endfor %}
+   <div class="admin">
+       <h3> Communities you are admin  </h3> </div>
+{% for community in communities_admin_list %}
+      <div class="communitiesAdmin">
+      <li> <a href=  "{% url 'community:viewpage' community.id %}">
+          <img src={{ community.image }}>
+      </a>
+          </li>
+          <form action="{% url 'community:loginview' %}" style="display:inline-block;">
+         <div class="views"> <input type="submit" value="View" /> </div>
+     </form>
+           </div>
+{% empty %}
+   <div class="nocommunities"> Sorry, are not an admin of any communities.</div>
 {% endfor %}
  </div>
 </div>

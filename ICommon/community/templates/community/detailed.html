@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
 {% load static %}
 <link rel="stylesheet" type="text/css"
- href="{% static 'community/style2.css' %}" />
+ href="{% static 'community/styles.css' %}" />
 <div class="banner">
      <input type="checkbox" id="show">
     <div class="popup">
@@ -44,6 +44,7 @@
       <img src= {{ post.image }} >
     <p> Likes : {{ post.likes.likes }} </p>
      <p> {{ post.description }} </p>
+    {% if request.user in user_community or request.user in user_admin %}
     <a href= "{% url 'community:likes' post.id %}">
     <div class="button">
        <div class="icon">
@@ -52,6 +53,7 @@
         <span><strong>Like</strong></span>
     </div>
          </a>
+      {% if request.user in user_community %}
     <a href= "{% url 'community:report' post.id %}">
     <div class="button1">
     <div class="icon1">
@@ -60,6 +62,17 @@
         <span><strong>Report</strong></span>
         </div>
     </a>
+    {% endif %}
+     {% if request.user in user_admin %}
+     <a href= "{% url 'community:deletepost' post.id %}">
+    <div class="button1">
+    <div class="icon1">
+        <img src='../../static/community/images/delete.png'>
+    </div>
+        <span><strong>Delete</strong></span>
+        </div>
+    </a>
+    {% endif %}
       <label for="show" class="show-btn">
     <div class="button2">
     <div class="icon2">
@@ -68,6 +81,7 @@
         <span><strong> Comment</strong></span>
         </div>
         </label>
+    {% endif %}
 </div>
 </div>
 </body>

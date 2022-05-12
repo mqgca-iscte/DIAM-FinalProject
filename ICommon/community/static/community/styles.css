@@ -83,8 +83,8 @@
 
 .popup{
     background-color: black;
-    height:520px;
-    width: 400px;
+    height: 80%;
+    width: 30%;
     margin-left: 35%;
     position: center;
     transform: translateY(10%);
@@ -185,6 +185,8 @@ form .btn input:hover{
 
  .button .icon img{
      margin-top: 4px;
+     width: 25px;
+     height: 25px;
  }
 
  .button span{
@@ -295,5 +297,231 @@ input[type="checkbox"]{
     height: 23px;
     width: 23px;
     box-sizing: border-box;
+}
+
+.about{
+    height : 200px;
+    background-color: #111212;
+}
+
+.about  h3{
+    color : white;
+    margin-left: 2%;
+}
+
+.about p{
+    color : white;
+    margin-top : 1%;
+    margin-left: 2%;
+}
+
+.about .division{
+    border-left : 1px solid white;
+    height : 150px;
+    position: absolute;
+    left: 30%;
+    margin-left: -5%;
+    bottom : -26.5%;
+    border-radius: 50px;
+}
+
+.about a img{
+    width : 250px;
+    height: auto;
+    margin-top: 1%;
+    margin-left: 2%;
+}
+
+.about .futureimage {
+    height: 160px;
+    width: 160px;
+    position: absolute;
+    border-radius: 100px;
+    margin-left: 35%;
+    margin-top: -12%;
+    z-index: 1;
+    overflow: hidden;
+    background: conic-gradient(#fd004c, #fe9000,#fff020,#3edf4b,#3363ff,#b102b7,#fd004c);
+}
+
+.about .futureimage:hover{
+    animation: spin 3s infinite linear;
+}
+
+@keyframes spin {
+ 100%{
+     transform: rotate(360deg);
+ }
+}
+
+.futureimage img{
+    max-height: 150px;
+    max-width: 150px;
+    border-radius: 100px;
+    margin-left: 3%;
+     z-index: 2;
+    margin-top: 3%;
+    position: relative;
+}
+
+.comunidades1{
+    display: inline-block;
+    float: left;
+    position: center;
+    margin-left: 4%;
+}
+
+.comunidades1 li{
+    text-decoration: none;
+    list-style: none;
+}
+
+.comunidade1 li a img{
+    height: 300px;
+    width : auto;
+}
+
+.registerdeny input{
+    height: 30px;
+    width: 100px;
+    outline: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 2px solid darkred;
+    background-color: darkred;
+    letter-spacing: 1px;
+    font-family: 'Cardo', serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.registerdeny input:hover{
+    background-color: #730000;
+}
+
+.registeraccept input{
+    height: 30px;
+    width: 100px;
+    outline: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 2px solid #009c03;
+    background-color:  #009c03;
+    letter-spacing: 1px;
+    font-family: 'Cardo', serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.registeraccept input:hover{
+    background-color: #027300;
+}
+
+.registerdelete input{
+    height: 30px;
+    width: 100px;
+    outline: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 2px solid blue;
+    background-color: blue;
+    letter-spacing: 1px;
+    font-family: 'Cardo', serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.registerdelete input:hover{
+    background-color: darkblue;
+}
+
+
+.about .information p{
+    color : white;
+}
+
+.information p{
+    margin-left: 55%;
+    margin-top: -8%;
+    color: white;
+}
+
+
+.communitiesAdmin{
+    display: inline-block;
+    float: left;
+    position: center;
+    margin-top: 2%;
+}
+
+.communitiesAdmin li{
+    text-decoration: none;
+    list-style: none;
+}
+
+.communitiesAdmin li img{
+    height : 220px;
+    width : auto;
+}
+
+.communitiesJoined{
+    display: inline-block;
+    float: left;
+    position: center;
+    margin-top : 1%;
+}
+
+.joined h3{
+    margin-top : -5%;
+}
+
+.admin h3{
+    margin-top : 20%;
+}
+
+.communitiesJoined li{
+    text-decoration: none;
+    list-style: none;
+}
+
+.communitiesJoined li img{
+    height : 220px;
+    width : auto;
+}
+
+.nocommunities {
+    color : white;
+    text-decoration: none;
+    list-style: none;
+}
+
+.views input{
+    height: 30px;
+    width: 100px;
+    outline: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 2px solid blue;
+    background-color: transparent;
+    letter-spacing: 1px;
+    font-family: 'Cardo', serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.views input:hover{
+    background-color: blue;
 }
 

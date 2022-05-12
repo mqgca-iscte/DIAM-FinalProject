@@ -21,9 +21,8 @@
     justify-content: space-between;
 }
 
-.content img{
-    max-width: 200px;
-    height: auto;
+.navbar h1{
+    color: #ffffff;
 }
 
 .logo {
@@ -38,26 +37,123 @@
     position: relative;
 }
 
-.navbar ul li h1{
-    color: white;
+.navbar ul li a{
+    text-decoration: none;
+    color: #fff;
     text-transform: uppercase;
 }
 
-.text{
+.navbar ul li::after{
+    content: '';
+    height:3px;
+    width: 0;
+    background: #00c217;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+
+.navbar ul li:hover::after{
     width : 100%;
+}
+
+.content{
+    width : 100%;
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
     text-align: center;
     color: #fff;
 }
 
-.text ul a{
+.show-btn{
     color: white;
-    text-decoration: none;
+    cursor: pointer;
 }
 
-.text ul a:hover{
-    color: #009c03;
+#show:checked ~ .content{
+    display: none;
+}
+
+#show:checked ~ .popup{
+    display: block;
+}
+
+.popup{
+    background-color: black;
+    height:520px;
+    width: 400px;
+    margin-left: 35%;
+    position: center;
+    transform: translateY(10%);
+    border-radius: 10px;
+    display: none;
+}
+.popup a{
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+form{
+    margin-top: -40px;
+}
+
+.popup form .data{
+    height: 45px;
+    width: 100%;
+    margin: 40px 0;
+}
+
+form .data input{
+    height: 80%;
+    width: 80%;
+    margin-top: 5%;
+    margin-left: 8%;
+    padding-left: 10px;
+    font-size: 17px;
+    border: 1px solid lightgrey;
+}
+
+.popup h4{
+    color: white;
+    margin-left: 5%;
+}
+
+.popup h5{
+    color: darkgrey;
+    margin-left: 35%;
+}
+
+form .btn {
+    height: 45px;
+    width: 100%;
+    margin-top: 10%;
+    margin-left: 4.5%
+}
+
+form .btn input{
+    height: 100%;
+    width: 80%;
+    outline: none;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 2px solid #009c03;
+    background-color: transparent;
+    margin-left: 20px;
+    margin-top: -30px;
+    letter-spacing: 1px;
+    font-family: 'Cardo', serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .5s;
+}
+
+form .btn input:hover{
+    background-color: #009c03;
 }
 
 .registeraccept input{
@@ -69,7 +165,7 @@
     font-weight: 500;
     border-radius: 25px;
     border: 2px solid #009c03;
-    background-color: transparent;
+    background-color:  #009c03;
     letter-spacing: 1px;
     font-family: 'Cardo', serif;
     text-transform: uppercase;
@@ -78,5 +174,158 @@
 }
 
 .registeraccept input:hover{
-    background-color: #009c03;
+    background-color: #027300;
+}
+
+.views input{
+    height: 30px;
+    width: 100px;
+    outline: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 2px solid blue;
+    background-color: transparent;
+    letter-spacing: 1px;
+    font-family: 'Cardo', serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.views input:hover{
+    background-color: blue;
+}
+
+
+.comunidades{
+    display: inline-block;
+    float: left;
+    position: center;
+}
+
+.comunidades li{
+    text-decoration: none;
+    list-style: none;
+}
+
+
+
+.communitiesAdmin{
+    display: inline-block;
+    float: left;
+    position: center;
+    margin-top: 2%;
+}
+
+.communitiesAdmin li{
+    text-decoration: none;
+    list-style: none;
+}
+
+.communitiesAdmin li img{
+    height : 220px;
+    width : auto;
+}
+
+.communitiesJoined{
+    display: inline-block;
+    float: left;
+    position: center;
+    margin-top : 1%;
+}
+
+.joined h3{
+    margin-top : 1%;
+}
+
+.admin h3{
+    margin-top : 20%;
+}
+
+.communitiesJoined li{
+    text-decoration: none;
+    list-style: none;
+}
+
+.communitiesJoined li img{
+    height : 220px;
+    width : auto;
+}
+
+
+.comunidades1{
+    display: inline-block;
+    float: left;
+    position: center;
+    margin-left: 4%;
+}
+
+.comunidades1 li{
+    text-decoration: none;
+    list-style: none;
+}
+
+.comunidades1 li a img{
+    height: 200px;
+    width : auto;
+}
+
+.registerdeny input{
+    height: 30px;
+    width: 100px;
+    outline: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 2px solid darkred;
+    background-color: darkred;
+    letter-spacing: 1px;
+    font-family: 'Cardo', serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.registerdeny input:hover{
+    background-color: #730000;
+}
+
+.registerdelete input{
+    height: 30px;
+    width: 100px;
+    outline: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 2px solid blue;
+    background-color: blue;
+    letter-spacing: 1px;
+    font-family: 'Cardo', serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.registerdelete input:hover{
+    background-color: darkblue;
+}
+
+
+.content a{
+    text-decoration: none;
+}
+
+.nocommunities {
+    color : white;
+    text-decoration: none;
+    list-style: none;
+}
+
+.content img{
+    height : 300px;
+    width: auto;
 }

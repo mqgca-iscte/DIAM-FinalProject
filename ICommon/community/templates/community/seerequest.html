@@ -8,10 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
 {% load static %}
 <link rel="stylesheet" type="text/css"
- href="{% static 'community/style1.css' %}" />
+ href="{% static 'community/styles.css' %}" />
 <div class="banner">
      <div class="content">
-     {% if request_list %}
+         {% if request_list %}
     <h3> Requests list </h3>
         <ul>
  {% for request in request_list %}

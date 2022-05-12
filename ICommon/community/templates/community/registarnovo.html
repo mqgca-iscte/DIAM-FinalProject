@@ -16,7 +16,7 @@
      <div class="error"> <p><strong>{{ error_message }}</strong></p> </div>
 {% endif %}
 {% load static %}
-<form action="{% url 'community:registarnovo' %}" method="POST" > {% csrf_token %}
+<form action="{% url 'community:registarnovo' %}" method="POST"  enctype="multipart/form-data"> {% csrf_token %}
     <div class="data">
     <label> Username :
     <input required type="text" name="username"/>
@@ -24,6 +24,10 @@
     <div class="data">
     <label> Email :
     <input required type="email" name="email"/>
+    </label><br/></div>
+    <div class="image">
+    <label> Image
+    <input required type="file" name="myfile" accept="image/*"/>
     </label><br/></div>
     <div class="data">
     <label> Password :

@@ -8,21 +8,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
 {% load static %}
 <link rel="stylesheet" type="text/css"
- href="{% static 'community/style1.css' %}" />
+ href="{% static 'community/view.css' %}" />
 <div class="banner">
 <div class="content">
     <div class="navbar">
     <ul>
-    <li>
-<h1>{{ community.name }}</h1>
-        </li>
+        <li>
+            <h1><a href= "{% url 'community:communityinformation' community.id %}"> {{ community.name }} </a></h1> </li>
+         {% if community.user == request.user %}
+     <li><a href= "{% url 'community:seereports' community.id %}"> See reports </a></li>
+    {% endif %}
         </ul>
         </div>
-     <div class="text">
-       <form action="{% url 'community:createpost' community.id %}" style="display:inline-block;">
-         <div class="registeraccept"> <input type="submit" value="Create post" /> </div>
-     </form>
-        </div>
+    <h2>Post List </h2>
         {% for post in community.post_set.all %}
         <p>
             <div class="text">
@@ -31,6 +29,13 @@
         </div>
             </p>
         {% endfor %}
+            {% if request.user in user_community or user.is_superuser %}
+    <div class="text">
+       <form action="{% url 'community:createpost' community.id %}" style="display:inline-block;">
+         <div class="registeraccept"> <input type="submit" value="Create post" /> </div>
+     </form>
+        </div>
+    {% endif %}
 </div>
 </div>
 </body>

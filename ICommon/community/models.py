@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 class Utilizador(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.TextField()
 
 
 class Community(models.Model):
@@ -29,6 +30,7 @@ class Request(models.Model):
 class Likes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     likes = models.IntegerField()
+
 
 class Post(models.Model):
     username = models.CharField(max_length=100)

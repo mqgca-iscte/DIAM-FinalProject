@@ -8,16 +8,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
 {% load static %}
 <link rel="stylesheet" type="text/css"
- href="{% static 'community/style.css' %}" />
+ href="{% static 'community/styles.css' %}" />
 <div class="banner">
      <div class="content">
-     {% if reports_list %}
+         {% if report_list %}
     <h3> Reports list </h3>
         <ul>
- {% for reports in reports_list %}
+ {% for reports in report_list %}
+            {% if reports.post.community.name == community.name %}
  <li>
      <div>
-{{ reports.post.description }}
+         Community Name :
+         {{ reports.post.community.name }} ,
+         Post :
+{{ reports.post.description }} ,
+         Reason : {{ reports.reason }}
      <form action="{% url 'community:ignorereport' reports.id %}" style="display:inline-block;">
          <div class="registeraccept"> <input type="submit" value="Ignore" /> </div>
      </form>
@@ -25,6 +30,7 @@
          <div class="registerdeny">   <input type="submit" value="Delete" /> </div>
      </form>
      </div>
+     {% endif %}
   {% endfor %}
  </li>
 </ul>

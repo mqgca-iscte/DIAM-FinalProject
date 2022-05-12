@@ -8,11 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
 {% load static %}
 <link rel="stylesheet" type="text/css"
- href="{% static 'community/style.css' %}" />
+ href="{% static 'community/styles.css' %}" />
  <div class="banner">
   <div class="navbar">
       <ul>
-   <li><a href= "{% url 'community:seereports' %}"> See reports </a></li>
           {% if not user.is_authenticated %}
    <li><a href= "{% url 'community:registarnovo' %}"> Sign Up </a></li>
    <li><a href= "{% url 'community:loginview' %}"> Login </a></li>
@@ -45,20 +44,76 @@
     <h3> Community list </h3>
  {% for community in communities_list %}
             <div class="comunidades1">
-      <li><a href= "{% url 'community:viewpage' community.id %}"> <img src={{ community.image }}> </a> </li>
-         {% if request.user.is_authenticated %}
-      <form action="{% url 'community:joincommunity' community.id %}" style="display:inline-block;">
-         <div class="registeraccept"> <input type="submit" value="Join" /> </div>
-     </form>
-     {% endif %}
-      <form action="{% url 'community:loginview' %}" style="display:inline-block;">
+                <li><a href= "{% url 'community:viewpage' community.id %}"> <img src={{ community.image }} class="slider-img"> </a> </li>
+                 <form action="{% url 'community:viewpage' community.id %}" style="display:inline-block;">
          <div class="registerdeny"> <input type="submit" value="View" /> </div>
      </form>
-            </div>
-  {% endfor %}
-{% else %}
+              {% if user.is_authenticated %}
+              {% if not user.is_superuser %}
+               {% if not request.user == community.user %}
+              {% if community.users.all %}
+              {% for utilizador in community.users.all %}
+              {% if utilizador.user == request.user %}
+           <form action="{% url 'community:leavecommunity' community.id %}" style="display:inline-block;">
+         <div class="registerdeny"> <input type="submit" value="Leave" /> </div>
+     </form>
+                {% else  %}
+                 <form action="{% url 'community:joincommunity' community.id %}" style="display:inline-block;">
+         <div class="registeraccept"> <input type="submit" value="Join" /> </div>
+     </form>
+              {% endif %}
+              {% endfor %}
+                {% else %}
+                <form action="{% url 'community:joincommunity' community.id %}" style="display:inline-block;">
+         <div class="registeraccept"> <input type="submit" value="Join" /> </div>
+     </form>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+              {% endif %}
+             {% if user.is_superuser %}
+               <form action="{% url 'community:deletecommunity' community.id %}" style="display:inline-block;">
+         <div class="registerdelete"> <input type="submit" value="Delete" /> </div>
+     </form>
+              {% endif %}
+              </div>
+          {% endfor %}
+          {% else %}
 <p>There are no communities available.</p>
 {% endif %}
  </div>
  </div>
+<div class="about">
+    <h3> Information </h3>
+        <p>  Made by :
+         <br>Maria Costa,
+         <br>Nathan Lopes,
+         <br>Rodrigo Santos </p>
+    <a href="https://www.iscte-iul.pt/"> <img src='../../static/community/images/logo.png'> </a>
+    {% if request.user.is_authenticated and not user.is_superuser %}
+    <div class="division"> </div>
+    <div class="futureimage">  <img src= {{ request.session.user_image}}> </div>
+    <div class="information">
+       <p> Name = {{ request.user.username }}
+       <br> Email = {{ request.user.email }}
+       <br> Number of communities joined : {{ my_communities }}
+       <br> Number of communities you are the admin : {{ admin_communities }} </p>
+    </div>
+    {% elif user.is_superuser %}
+    <div class="division"> </div>
+    <div class="futureimage">  <img src='../../static/community/images/queen.jpg' > </div>
+    <div class="information">
+        <p> Admin, here is the information about the communities
+        <br> Communities number : {{ communities_list|length }}
+        <br> Total users : {{ utilizadores_list|length }}
+        <br> Total posts : {{ posts_list|length }}</p>
+    </div>
+    {% else %}
+     <div class="division"> </div>
+    <div class="futureimage">  <img src='../../static/community/images/unknown.jpg'>  </div>
+    <div class="information">
+       <p> You are not logged in yet </p>
+    </div>
+    {% endif %}
+</div>
 </body>
