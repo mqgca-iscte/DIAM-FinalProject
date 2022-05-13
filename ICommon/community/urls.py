@@ -23,6 +23,7 @@ urlpatterns = [
                path('detailed/<int:post_id>/deletepost', views.deletepost, name='deletepost'),
                path('detailed/<int:post_id>/report', views.report, name='report'),
                path('seereports/<int:community_id>', views.seereports, name="seereports"),
+               path('popularity', views.popular, name="popularity"),
                path('seereports/<int:reports_id>/ignorereport', views.ignorereport, name='ignorereport'),
                path('seereports/<int:reports_id>/deletereports', views.deletereports, name='deletereports'),
                path('detailed/<int:post_id>/createcomment', views.createcomment, name='createcomment'),

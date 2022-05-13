@@ -302,6 +302,7 @@ input[type="checkbox"]{
 .about{
     height : 200px;
     background-color: #111212;
+    padding: 10px 0;
 }
 
 .about  h3{
@@ -355,8 +356,9 @@ input[type="checkbox"]{
 }
 
 .futureimage img{
-    max-height: 150px;
-    max-width: 150px;
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
     border-radius: 100px;
     margin-left: 3%;
      z-index: 2;
@@ -525,3 +527,47 @@ input[type="checkbox"]{
     background-color: blue;
 }
 
+.popular{
+    margin-left: 25%;
+}
+
+.popularposts{
+    display: inline-block;
+    float: left;
+    position: center;
+    margin-top: 3%;
+    margin-left: 2%;
+}
+
+.popularposts li{
+    text-decoration: none;
+    list-style: none;
+}
+
+.popularposts a img{
+    height: 200px;
+    width: 200px;
+}
+
+.title{
+    width : 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-45%);
+    margin-left: -0.1%;
+    text-align: center;
+    color: #fff;
+}
+
+.title h3{
+    margin-top: -20%;
+}
+
+.crowns{
+  margin-left: -8%;
+}
+
+.crowns img{
+    width: 100px;
+    margin-left: 8%;
+}

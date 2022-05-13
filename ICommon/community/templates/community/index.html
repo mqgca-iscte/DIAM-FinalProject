@@ -16,6 +16,7 @@
    <li><a href= "{% url 'community:registarnovo' %}"> Sign Up </a></li>
    <li><a href= "{% url 'community:loginview' %}"> Login </a></li>
           {% endif %}
+   <li><a href= "{% url 'community:popularity' %}"> Popular </a></li>
           {% if user.is_superuser %}
    <li><a href= "{% url 'community:seerequest' %}"> Requests </a></li>
    <li><a href= "{% url 'community:createcommunities' %}"> Create community </a></li>
@@ -52,19 +53,17 @@
               {% if not user.is_superuser %}
                {% if not request.user == community.user %}
               {% if community.users.all %}
-              {% for utilizador in community.users.all %}
-              {% if utilizador.user == request.user %}
+              {% if utilizador_user in community.users.all %}
            <form action="{% url 'community:leavecommunity' community.id %}" style="display:inline-block;">
          <div class="registerdeny"> <input type="submit" value="Leave" /> </div>
      </form>
-                {% else  %}
+                {% else %}
                  <form action="{% url 'community:joincommunity' community.id %}" style="display:inline-block;">
          <div class="registeraccept"> <input type="submit" value="Join" /> </div>
      </form>
               {% endif %}
-              {% endfor %}
                 {% else %}
-                <form action="{% url 'community:joincommunity' community.id %}" style="display:inline-block;">
+                 <form action="{% url 'community:joincommunity' community.id %}" style="display:inline-block;">
          <div class="registeraccept"> <input type="submit" value="Join" /> </div>
      </form>
                 {% endif %}

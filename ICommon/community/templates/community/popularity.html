@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ICommon - HomePage</title>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
+{% load static %}
+<link rel="stylesheet" type="text/css"
+ href="{% static 'community/styles.css' %}" />
+<div class="banner">
+<div class="content">
+    <div class="title">
+    <h3> Popular posts </h3>
+        </div>
+    {% if post_popular %}
+     <div class="crowns">
+     <img src='../../static/community/images/crown.png'>
+     <img src='../../static/community/images/crownsilver.png'>
+     <img src='../../static/community/images/crownbronze.png'>
+        </div>
+     <div class="popular">
+    {% for post in post_popular %}
+    <div class="popularposts">
+        <a href= "{% url 'community:detailed' post.id %}"> <img src = {{ post.image }}> </a>
+         <br> <li> Likes : {{ post.likes.likes }}
+         <br> User : {{ post.username }}</li>
+    </div>
+    {% endfor %}
+</div>
+    {% else %}
+    <h2>No posts availble yet</h2>
+    {% endif %}
+ </div>
+</div>
+</body>
+</html>

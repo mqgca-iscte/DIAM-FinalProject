@@ -18,9 +18,9 @@ from .models import Community, Post, Request, Utilizador, Reports, Comment, Like
 
 
 def index(request):
-    communities_list = Community.objects.order_by('-creation_data')[:5]
-    utilizadores_list = Utilizador.objects.order_by('-id')[:5]
-    posts_list = Post.objects.order_by('-id')[:5]
+    communities_list = Community.objects.order_by('-creation_data')
+    utilizadores_list = Utilizador.objects.order_by('-id')
+    posts_list = Post.objects.order_by('-id')
     my_communities = 0
     admin_communities = 0
     for community in communities_list.all():
@@ -30,8 +30,15 @@ def index(request):
     for community in communities_list.all():
         if request.user == community.user:
             admin_communities += 1
-    context = {'communities_list': communities_list, 'my_communities': my_communities,
-               'admin_communities': admin_communities, 'utilizadores_list': utilizadores_list, 'posts_list': posts_list}
+    if not request.user.is_superuser and request.user.is_authenticated:
+        utilizador_user = get_object_or_404(Utilizador, user_id=request.user.id)
+        context = {'communities_list': communities_list, 'my_communities': my_communities,
+                   'admin_communities': admin_communities, 'utilizadores_list': utilizadores_list,
+                   'posts_list': posts_list, 'utilizador_user': utilizador_user}
+    else:
+        context = {'communities_list': communities_list, 'my_communities': my_communities,
+                   'admin_communities': admin_communities, 'utilizadores_list': utilizadores_list,
+                   'posts_list': posts_list}
     return render(request, 'community/index.html', context)
 
 
@@ -79,7 +86,7 @@ def loginview(request):
 
 def logoutt(request):
     logout(request)
-    communities_list = Community.objects.order_by('-creation_data')[:5]
+    communities_list = Community.objects.order_by('-creation_data')
     context = {'communities_list': communities_list}
     return render(request, 'community/index.html', context)
 
@@ -185,6 +192,11 @@ def likes(request, post_id):
         return HttpResponseRedirect(reverse('community:detailed', args=(post.id,)))
 
 
+def popular(request):
+    post_popular = Post.objects.order_by('-likes__likes')[:3]
+    return render(request, 'community/popularity.html', {'post_popular': post_popular})
+
+
 def communityinformation(request, community_id):
     community = get_object_or_404(Community, pk=community_id)
     return render(request, 'community/communityinformation.html', {'community': community})
@@ -199,7 +211,7 @@ def detailed(request, post_id):
     if post.community.user == request.user:
         user_admin.append(post.community.user)
     if request.user.is_superuser:
-        user_admin.append(post.community.user)
+        user_admin.append(request.user)
     for community_utilizador in users_community.all():
         if community_utilizador.user == request.user:
             user_community.append(community_utilizador.user)
@@ -221,7 +233,7 @@ def report(request, post_id):
 
 def seereports(request, community_id):
     community = get_object_or_404(Community, pk=community_id)
-    report_list = Reports.objects.order_by('-id')[:5]
+    report_list = Reports.objects.order_by('-id')
     context = {'report_list': report_list, 'community': community}
     return render(request, 'community/reports.html', context)
 
@@ -276,7 +288,7 @@ def createcomment(request, post_id):
 
 
 def seerequest(request):
-    request_list = Request.objects.order_by('-creation_data')[:5]
+    request_list = Request.objects.order_by('-creation_data')
     context = {'request_list': request_list}
     return render(request, 'community/seerequest.html', context)
 
@@ -299,7 +311,7 @@ def mycommunities(request):
     user_id = request.session.get('user_id')
     utilizador = get_object_or_404(Utilizador, user_id=user_id)
     communities_list = utilizador.communities.all()
-    communities_lista = Community.objects.order_by('-creation_data')[:5]
+    communities_lista = Community.objects.order_by('-creation_data')
     communities_admin_list = []
     for community in communities_lista:
         if request.user == community.user:
