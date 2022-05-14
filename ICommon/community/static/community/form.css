@@ -3,7 +3,7 @@
     padding: 0;
     outline: none;
     box-sizing: border-box;
-    font-family: 'Cardo', serif;
+    font-family: 'Quicksand', sans-serif;
 }
 body{
     height: 100vh;
@@ -141,4 +141,50 @@ form .btn1 input:hover{
 .signup_link a:hover{
     text-decoration: underline;
     color: #00c217;
+}
+
+.navbar{
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar{
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+
+.navbar ul li a{
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.navbar ul li::after{
+    content: '';
+    height:3px;
+    width: 0;
+    background: #00c217;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+
+.navbar ul li:hover::after{
+    width : 100%;
 }

@@ -14,9 +14,9 @@
 </head>
 <body>
     <div class="banner">
-    <div class="navbar"></div>
+   <div class="navbar"> <ul> <li> <a href="{% url 'community:index' %}"> Home </a> </li> </ul> </div>
     {% if search %}
-        <h1> You searched for {{ search }} </h1>
+        <h1 style="margin-top: -5%"> You searched for {{ search }} </h1>
         <br/>
         {% if communities %}
          <div id="banner" class="carousel slide" data-bs-ride="carousel">

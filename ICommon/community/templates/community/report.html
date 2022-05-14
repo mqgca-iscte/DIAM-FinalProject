@@ -1,14 +1,15 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Report post</title>
-</head>
-<body>
-<link href="https://fonts.googleapis.com/css2?family=Cardo&display=swap" rel="stylesheet">
-{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css"
  href="{% static 'community/form.css' %}" />
+</head>
+<body>
+<div class="navbar"> <ul> <li><a href="{% url 'community:index' %}"> Home </a></li> </ul> </div>
 <div class="container">
 <div class="text"> <h1>New report</h1> </div>
 <form action="{% url 'community:report' post.id %}" method="POST" enctype="multipart/form-data">

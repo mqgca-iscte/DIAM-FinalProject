@@ -13,12 +13,12 @@
 <div class="content">
     <div class="navbar">
     <ul>
-        <li>
-            <h1><a href= "{% url 'community:communityinformation' community.id %}"> {{ community.name }} </a></h1> </li>
-         {% if community.user == request.user %}
+        <li><h1><a href= "{% url 'community:communityinformation' community.id %}"> {{ community.name }} </a></h1> </li>
+            <li><a href="{% url 'community:index' %}"> Home </a></li>
+        {% if community.user == request.user %}
      <li><a href= "{% url 'community:seereports' community.id %}"> See reports </a></li>
-    {% endif %}
         </ul>
+    {% endif %}
         </div>
     <h2>Post List </h2>
         {% for post in community.post_set.all %}

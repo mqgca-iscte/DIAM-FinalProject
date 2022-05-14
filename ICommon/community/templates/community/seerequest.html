@@ -10,13 +10,14 @@
 <link rel="stylesheet" type="text/css"
  href="{% static 'community/styles.css' %}" />
 <div class="banner">
+    <div class="navbar"> <ul> <li><a href="{% url 'community:index' %}"> Home </a></li> </ul> </div>
      <div class="content">
          {% if request_list %}
-    <h3> Requests list </h3>
+    <h3 style="margin-top: -10%;"> Requests list </h3>
         <ul>
  {% for request in request_list %}
  <li>
-     <div>
+     <div style="margin-top: 2%">
 {{ request.name }}
      <form action="{% url 'community:acceptrequest' request.id %}" style="display:inline-block;">
          <div class="registeraccept"> <input type="submit" value="Accept" /> </div>

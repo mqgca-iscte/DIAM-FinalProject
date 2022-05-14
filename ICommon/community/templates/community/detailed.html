@@ -10,8 +10,9 @@
 <link rel="stylesheet" type="text/css"
  href="{% static 'community/styles.css' %}" />
 <div class="banner">
+  <div class="navbar"> <ul> <li><a href="{% url 'community:index' %}"> Home </a></li> </ul> </div>
      <input type="checkbox" id="show">
-    <div class="popup">
+    <div class="popup" style="margin-top: -5%">
          <div class="closebutton">
          <label for="show"> <img src='../../static/community/images/cancel.png' alt="submit"/> </label>
     </div>

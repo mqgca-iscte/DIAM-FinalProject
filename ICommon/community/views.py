@@ -69,7 +69,7 @@ def registarnovo(request):
             return HttpResponseRedirect(reverse('community:index', args=""))
     else:
         return render(request, 'community/registarnovo.html',
-                      {'error_message': "It was not possible to create a new user"})
+                      {})
 
 
 # Logs a user

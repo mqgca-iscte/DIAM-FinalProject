@@ -469,53 +469,18 @@ input[type="checkbox"]{
 }
 
 
-.communitiesAdmin{
-    display: inline-block;
-    float: left;
-    position: center;
-    margin-top: 2%;
-}
-
-.communitiesAdmin li{
-    text-decoration: none;
-    list-style: none;
-}
-
-.communitiesAdmin li img{
-    height : 220px;
-    width : auto;
-}
-
-.communitiesJoined{
-    display: inline-block;
-    float: left;
-    position: center;
-    margin-top : 1%;
-}
-
 .joined h3{
-    margin-top : -5%;
+    margin-top : -8.3%;
 }
 
 .admin h3{
     margin-top : 20%;
 }
 
-.communitiesJoined li{
-    text-decoration: none;
-    list-style: none;
+.admin{
+    margin-top: -20%;
 }
 
-.communitiesJoined li img{
-    height : 220px;
-    width : auto;
-}
-
-.nocommunities {
-    color : white;
-    text-decoration: none;
-    list-style: none;
-}
 
 .views input{
     height: 30px;

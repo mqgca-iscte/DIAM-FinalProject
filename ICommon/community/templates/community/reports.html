@@ -9,6 +9,7 @@
 {% load static %}
 <link rel="stylesheet" type="text/css"
  href="{% static 'community/styles.css' %}" />
+<div class="navbar"> <ul> <li><a href="{% url 'community:index' %}"> Home </a></li> </ul> </div>
 <div class="banner">
      <div class="content">
          {% if report_list %}

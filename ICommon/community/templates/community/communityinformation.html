@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css"
  href="{% static 'community/style.css' %}" />
 <div class="banner">
+<div class="navbar"> <ul> <li><a href="{% url 'community:index' %}"> Home </a></li> </ul> </div>
 <div class="content">
     <h1> Community : {{ community.name }} </h1>
      <img src= {{ community.image }} >

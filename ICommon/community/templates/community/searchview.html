@@ -11,8 +11,8 @@
 </head>
 <body>
 <div class="banner">
-    <div class="navbar"></div>
-    <div class="container">
+   <div class="navbar"> <ul> <li><a href="{% url 'community:index' %}"> Home </a></li> </ul> </div>
+    <div class="container" >
  <h1>Search the community you wish for :</h1>
   <form class="d-flex" method=GET action="{%  url 'community:search' %}">
           {% csrf_token %}
