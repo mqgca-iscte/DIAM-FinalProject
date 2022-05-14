@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'community/search.css' %}">
+    <!-- google font link -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+    <div class="navbar"></div>
+    <div class="container">
+ <h1>Search the community you wish for :</h1>
+  <form class="d-flex" method=GET action="{%  url 'community:search' %}">
+          {% csrf_token %}
+       <input class="form-control me-2" type="search" placeholder="Search Communities" aria-label="Search"
+        name='search'>
+        <br> <div class="btn"> <input type="submit" value="Search" /> </div>
+      </form>
+        </div>
+    </div>
+</body>
+</html>

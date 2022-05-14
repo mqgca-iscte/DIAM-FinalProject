@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+     <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'community/styles.css' %}">
+    <!-- google font link -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="banner">
+    <div class="navbar"></div>
+    {% if search %}
+        <h1> You searched for {{ search }} </h1>
+        <br/>
+        {% if communities %}
+         <div id="banner" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+        {% for community in communities %}
+        {% if forloop.first %}
+                            <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                                <h2 style="color:white" class="text-center" display="inline-block">{{ community.name }}</h2>
+                                <img src="{{ community.image }}" style="height:300px; width:220px !important;margin-left: 41.8%"  class="d-block w-100">
+                                <form action="{% url 'community:viewpage' community.id %}" style="display:inline-block; margin-left: 42.5%">
+                                    <div class="registerdeny"> <input type="submit" value="View" /> </div>
+                                </form>
+                               {% if user.is_authenticated %}
+              {% if not user.is_superuser %}
+               {% if not request.user == community.user %}
+              {% if community.users.all %}
+              {% if utilizador_user in community.users.all %}
+                                                    <form action="{% url 'community:leavecommunity' community.id %}" style="display:inline-block;">
+                                                        <div class="registerdeny"> <input type="submit" value="Leave" /> </div>
+                                                    </form>
+                                                {% else %}
+                                                    <form action="{% url 'community:joincommunity' community.id %}" style="display:inline-block;">
+                                                        <div class="registeraccept"> <input type="submit" value="Join" /> </div>
+                                                    </form>
+                                                {% endif %}
+                                        {% else %}
+                                            <form action="{% url 'community:joincommunity' community.id %}" style="display:inline-block;">
+                                                <div class="registeraccept"> <input type="submit" value="Join" /> </div>
+                                            </form>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                                {% endif %}
+                                {% if user.is_superuser %}
+                                    <form action="{% url 'community:deletecommunity' community.id %}" style="display:inline-block;">
+                                        <div class="registerdelete"> <input type="submit" value="Delete" /> </div>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="carousel-item {% if  forloop.first %} active {% endif %}">
+                                  <h2 style="color:white" class="text-center" display="inline-block">{{ community.name }}</h2>
+                                <img src="{{ community.image }}" style="height:300px; width:220px !important;margin-left: 41.8%"  class="d-block w-100">
+                                <form action="{% url 'community:viewpage' community.id %}" style="display:inline-block; margin-left: 42.5%">
+                                    <div class="registerdeny"> <input type="submit" value="View" /> </div>
+                                </form>
+                               {% if user.is_authenticated %}
+              {% if not user.is_superuser %}
+               {% if not request.user == community.user %}
+              {% if community.users.all %}
+              {% if utilizador_user in community.users.all %}
+                                                    <form action="{% url 'community:leavecommunity' community.id %}" style="display:inline-block;">
+                                                        <div class="registerdeny"> <input type="submit" value="Leave" /> </div>
+                                                    </form>
+                                                {% else %}
+                                                    <form action="{% url 'community:joincommunity' community.id %}" style="display:inline-block;">
+                                                        <div class="registeraccept"> <input type="submit" value="Join" /> </div>
+                                                    </form>
+                                                {% endif %}
+                                        {% else %}
+                                            <form action="{% url 'community:joincommunity' community.id %}" style="display:inline-block;">
+                                                <div class="registeraccept"> <input type="submit" value="Join" /> </div>
+                                            </form>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                                {% endif %}
+                                {% if user.is_superuser %}
+                                    <form action="{% url 'community:deletecommunity' community.id %}" style="display:inline-block;">
+                                        <div class="registerdelete"> <input type="submit" value="Delete" /> </div>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        <a class="carousel-control-prev" href="#banner" role="button" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#banner" role="button" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </a>
+                    {% endfor %}
+                </div>
+                </div>
+        {% else %}
+       <h3> There are no results for {{ search }} </h3>
+        {% endif %}
+    {% else %}
+        <h3> There was no search</h3>
+
+    {% endif %}
+    </div>
+<!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+</body>
+</html>
